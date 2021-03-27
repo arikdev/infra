@@ -26,7 +26,6 @@ static arr_item_t *handle_array(char *str)
 		return NULL;
 
 	clean_blanks(str);
-	printf("Handle arr str:%s:\n", str);
 	tmp = strdup(str);
 
 	for (i = 0; i < len; i++) {
@@ -58,8 +57,6 @@ static int parse_list_of_arrays(char *str, arr_item_t **list)
 	arr_item_t *item;
 	stack_t *items_s = NULL;
 	char work[1024];
-
-	printf("str:%s:\n", str);
 
 	for (i = 0; i < len; i++) {
 		if (str[i] == '[') {
