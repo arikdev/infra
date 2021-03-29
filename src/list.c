@@ -15,7 +15,8 @@ list_t *list_new(list_ops_t *ops)
 	if (!(new_list = malloc(sizeof(list_t))))
 		return NULL;
 	memset(new_list, 0, sizeof(list_t));
-	new_list->ops = *ops;
+	if (ops)
+		new_list->ops = *ops;
 
 	return new_list;
 }
