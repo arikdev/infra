@@ -111,3 +111,24 @@ void *list_get(list_t *l, void *d)
 	return NULL;
 }
 
+void list_reset(list_t *l)
+{
+	list_node_t *p, *del;
+
+	for (p = l->head; p; ) {
+		if (l->ops.destroy)
+			l->ops.destroy(p->data);
+		del = p;
+		p = p->next;
+		free(del);
+	}
+	l->head = NULL;
+}
+
+void list_destroy(list_t **l)
+{
+	list_reset(*l);
+	free(*l);
+	*l = NULL;
+}
+

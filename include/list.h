@@ -5,6 +5,7 @@ typedef struct list_node list_node_t;
 
 typedef struct {
 	int (*cmp)(void *d1, void * d2);
+	void (*destroy)(void *d);
 	void (*print)(void *d);
 } list_ops_t;
 
@@ -20,5 +21,7 @@ void list_print(list_t *l);
 void list_exec(list_t *l, void (*cb)(void *d));
 void *list_pop(list_t *l, int id);
 void *list_get(list_t *l, void *d);
+void list_reset(list_t *l);
+void list_destroy(list_t **l);
 
 #endif
