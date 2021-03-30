@@ -44,3 +44,26 @@ void graph_print(graph_node_t *node)
 	printf("\n");
 }
 
+static void handle_edge(void *data, void *param)
+{
+	graph_node_t *graph_node = (graph_node_t *)data;
+	list_t *nodes = (list_t *)param;
+
+	list_add_tail(nodes, graph_node);
+}
+
+void exec_breadfirst(graph_node_t *node, void (*cb)(char *name))
+{
+	list_t *nodes;
+
+	if (!(nodes = list_new(&ops)))
+		return;
+	list_add_tail(nodes, node);
+
+	while (node = list_pop(nodes, 0)) {
+		printf(":%s \n", node->name);
+		list_exec(node->children, handle_edge, nodes);
+	}
+	printf("\n");
+}
+
