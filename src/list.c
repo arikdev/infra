@@ -60,13 +60,13 @@ void list_print(list_t *l)
 	}
 }
 
-void list_exec(list_t *l, void (*cb)(void *d))
+void list_exec(list_t *l, void (*cb)(void *d, void *param), void *param)
 {
 	list_node_t *p;
 
 	for (p = l->head; p; p = p->next) { 
 		if (cb)
-			cb(p->data);
+			cb(p->data, param);
 	}
 }
 
